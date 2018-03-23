@@ -24,4 +24,11 @@
         <item name="android:paddingTop">@dimen/nav_header_vertical_spacing</item>
     </style>
 
+    <style name="NavMenuGroups">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
 </resources>

@@ -4,20 +4,140 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:iconTint="@color/colorPrimaryDark"
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+
+        <item android:title="@string/menu_news"
+            style="@styles/NavMenuGroup">
+
+            <menu>
+                <item
+                    android:id="@+id/nav_brasil_news"
+                    android:icon="@drawable/ic_action_flag"
+                    android:title="@string/menu_brazil"/>
+                <item
+                    android:id="@+id/nav_world"
+                    android:icon="@drawable/ic_action_globe"
+                    android:title="@string/menu_world" />
+                <item
+                    android:id="@+id/nav_us_news"
+                    android:icon="@drawable/ic_action_flag"
+                    android:title="@string/menu_us_news" />
+                <item
+                    android:id="@+id/nav_environment"
+                    android:icon="@drawable/ic_action_grow"
+                    android:title="@string/menu_environment" />
+                <item
+                    android:id="@+id/nav_business"
+                    android:icon="@drawable/ic_action_business"
+                    android:title="@string/menu_business" />
+                <item
+                    android:id="@+id/nav_tech"
+                    android:icon="@drawable/ic_memory"
+                    android:title="@string/menu_tech" />
+                <item
+                    android:id="@+id/nav_science"
+                    android:icon="@drawable/ic_action_lab"
+                    android:title="@string/menu_science" />
+            </menu>
+
+        </item>
+
+        <item android:title="@string/menu_opinion"
+            style="@styles/NavMenuGroup">
+
+            <menu>
+                <item
+                    android:id="@+id/nav_the_guardian_view"
+                    android:icon="@drawable/ic_action_news"
+                    android:title="@string/menu_the_guardian_view"/>
+                <item
+                    android:id="@+id/nav_columnists"
+                    android:icon="@drawable/ic_action_bulb"
+                    android:title="@string/menu_columinists" />
+            </menu>
+
+        </item>
+
+        <item android:title="@string/menu_sport"
+            style="@styles/NavMenuGroup">
+
+            <menu>
+                <item
+                    android:id="@+id/nav_soccer"
+                    android:icon="@drawable/ic_action_ball"
+                    android:title="@string/menu_soccer"/>
+                <item
+                    android:id="@+id/nav_nfl"
+                    android:icon="@drawable/ic_action_ball"
+                    android:title="@string/menu_nfl" />
+                <item
+                    android:id="@+id/nav_us_tennis"
+                    android:icon="@drawable/ic_action_ball"
+                    android:title="@string/menu_tennis" />
+                <item
+                    android:id="@+id/nav_nba"
+                    android:icon="@drawable/ic_action_ball"
+                    android:title="@string/menu_nba" />
+                <item
+                    android:id="@+id/nav_mlb"
+                    android:icon="@drawable/ic_action_ball"
+                    android:title="@string/menu_mlb" />
+            </menu>
+
+        </item>
+
+        <item android:title="@string/menu_culture"
+            style="@styles/NavMenuGroup">
+
+            <menu>
+                <item
+                    android:id="@+id/nav_film"
+                    android:icon="@drawable/ic_action_movie"
+                    android:title="@string/menu_film"/>
+                <item
+                    android:id="@+id/nav_books"
+                    android:icon="@drawable/ic_action_book"
+                    android:title="@string/menu_books" />
+                <item
+                    android:id="@+id/nav_music"
+                    android:icon="@drawable/ic_action_music_1"
+                    android:title="@string/menu_music" />
+                <item
+                    android:id="@+id/nav_games"
+                    android:icon="@drawable/ic_action_joypad"
+                    android:title="@string/menu_games" />
+            </menu>
+
+        </item>
+
+        <item android:title="@string/menu_lifestyle"
+            style="@styles/NavMenuGroup">
+
+            <menu>
+                <item
+                    android:id="@+id/nav_fashion"
+                    android:icon="@drawable/ic_action_tshirt"
+                    android:title="@string/menu_fashion"/>
+                <item
+                    android:id="@+id/nav_Food"
+                    android:icon="@drawable/ic_restaurant_menu"
+                    android:title="@string/menu_food" />
+                <item
+                    android:id="@+id/nav_home_garden"
+                    android:icon="@drawable/ic_action_home"
+                    android:title="@string/menu_home_garden" />
+                <item
+                    android:id="@+id/nav_health_fitness"
+                    android:icon="@drawable/ic_fitness_center"
+                    android:title="@string/menu_health_fitness" />
+                <item
+                    android:id="@+id/nav_travel"
+                    android:icon="@drawable/ic_beach_access"
+                    android:title="@string/menu_travel" />
+            </menu>
+
+        </item>
+
     </group>
 
-    <item android:title="Settings">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-        </menu>
-    </item>
 
 </menu>

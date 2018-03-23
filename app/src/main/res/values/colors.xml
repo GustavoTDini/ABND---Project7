@@ -4,4 +4,9 @@
     <color name="colorPrimary">#227eaa</color>
     <color name="colorPrimaryDark">#00527b</color>
     <color name="colorAccent">#FCBB47</color>
+    <color name="newsAccent">#D80000</color>
+    <color name="opinionsAccent">#EF4A00</color>
+    <color name="sportAccent">#0082C9</color>
+    <color name="cultureAccent">#A48458</color>
+    <color name="lifestyleAccent">#CB007D</color>
 </resources>
