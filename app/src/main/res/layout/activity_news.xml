@@ -21,6 +21,16 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_news"
         app:menu="@menu/activity_news_drawer"
-        android:background="@android:color/white"/>
+        android:background="@android:color/white">
+
+        <android.support.design.widget.CheckableImageButton
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/powered_by_the_guardian"
+            android:layout_gravity="bottom"
+            android:background="@android:color/white"/>
+
+    </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

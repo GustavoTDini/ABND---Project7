@@ -43,4 +43,6 @@
     <string name="settings_from_date">From Date:</string>
     <string name="settings_to_date">To Date:</string>
 
+    <string name="search_hint">Search for a Topic</string>
+
 </resources>

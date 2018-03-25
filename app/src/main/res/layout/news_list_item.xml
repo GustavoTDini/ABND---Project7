@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="News"
+            type="com.example.android.project7.News" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="88dp"
+        android:padding="4dp">
+
+        <ImageView
+            android:id="@+id/news_list_thumbnail"
+            android:layout_width="125dp"
+            android:layout_height="75dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/news_placeholder" />
+
+        <TextView
+            android:id="@+id/news_list_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/news_list_tag"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/news_list_thumbnail"
+            android:layout_marginLeft="145dp"
+            android:layout_marginRight="24dp"
+            android:text="@{News.newsTitle}"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/news_list_title"
+            android:src="@drawable/ic_open_in_browser" />
+
+        <TextView
+            android:id="@+id/news_list_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/news_list_thumbnail"
+            android:layout_alignParentEnd="true"
+            android:text="@{News.newsTag}"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+</layout>

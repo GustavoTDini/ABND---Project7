@@ -137,7 +137,10 @@
 
         </item>
 
-    </group>
+        <item
+            android:id="@+id/nav_empty"
+            android:title=""/>
 
+    </group>
 
 </menu>

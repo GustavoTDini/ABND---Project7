@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="News"
+            type="com.example.android.project7.News" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="176dp"
+        android:padding="4dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/news_placeholder"
+            android:layout_centerInParent="true"
+            android:scaleType="centerCrop"
+
+            android:id="@+id/main_story_image" />
+
+        <TextView
+            android:id="@+id/main_story_title"
+            android:layout_width="match_parent"
+            android:layout_height="88dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="bottom"
+            android:text="@{News.newsTitle}"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:text="Top Story"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignEnd="@+id/main_story_image"
+            android:layout_alignTop="@+id/main_story_image"
+            android:src="@drawable/ic_open_in_browser"
+            android:id="@+id/main_story_link" />
+
+        <TextView
+            android:id="@+id/main_story_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/main_story_link"
+            android:layout_toStartOf="@+id/main_story_link"
+            android:text="@{News.newsTitle}"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+</layout>
