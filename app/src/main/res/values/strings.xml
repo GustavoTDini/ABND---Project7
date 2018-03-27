@@ -7,6 +7,11 @@
 
     <string name="news_app">News App</string>
     <string name="the_guardian_logo">The Guardian Logo</string>
+    <string name="search_hint">Search for a Topic</string>
+    <string name="top_story">Top Story</string>
+    <string name="thumbnail_image">Thumbnail Image</string>
+    <string name="open_in_browser_icon">Open in Browser Icon</string>
+    <string name="empty_return_list">Your Search Return no Results</string>
 
     <string name="menu_news">News</string>
     <string name="menu_brazil">Brazil</string>
@@ -36,6 +41,7 @@
     <string name="menu_home_garden"><![CDATA[Home & Garden]]></string>
     <string name="menu_health_fitness"><![CDATA[Health & Fitness]]></string>
     <string name="menu_travel">Travel</string>
+    <string name="menu_other_sports">Others Sports</string>
 
     <string name="action_settings">Settings</string>
     <string name="settings_news_order">News Order:</string>
@@ -43,6 +49,11 @@
     <string name="settings_from_date">From Date:</string>
     <string name="settings_to_date">To Date:</string>
 
-    <string name="search_hint">Search for a Topic</string>
+
+
+    <string name="GUARDIAN_API_REQUEST_URL">http://content.guardianapis.com/search?</string>
+    <string name="GUARDIAN_API_REQUEST_KEY">test</string>
+    <string name="GUARDIAN_API_REQUEST_FIELDS">thumbnail</string>
+
 
 </resources>

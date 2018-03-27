@@ -1,6 +1,12 @@
 package com.example.android.project7;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -31,6 +37,12 @@ public final class NewsAppUtilities {
 
     private static final int SET_CONNECT_TIMEOUT_IN_MILISSECONDS = 15000;
 
+    private static final String GUARDIAN_API_REQUEST_URL = "http://content.guardianapis.com/search?";
+
+    private static final String GUARDIAN_API_REQUEST_KEY = "test";
+
+    private static final String GUARDIAN_API_REQUEST_FIELDS = "thumbnail";
+
     /**
      * Tag for the log messages
      */
@@ -43,6 +55,7 @@ public final class NewsAppUtilities {
     /**
      * Retorna um Objeto URL a partir de Uma String.
      */
+    @Nullable
     private static URL createUrl(String stringUrl) {
         URL url;
         try {
@@ -97,6 +110,7 @@ public final class NewsAppUtilities {
     /**
      * Converte o  {@link InputStream} em uma String que contem a resposta JSON do servidor
      */
+    @NonNull
     private static String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder output = new StringBuilder();
         if (inputStream != null) {
@@ -112,8 +126,9 @@ public final class NewsAppUtilities {
     }
 
     /**
-     * Retorna a lista dos {@link News} que foram retirados do resposta JSON criado pela URL
+     * Retorna a lista dos {@link News} a partir do Json
      */
+    @Nullable
     private static List<News> extractFeatureFromJson(String newsJson) {
 
         if (TextUtils.isEmpty(newsJson)) {
@@ -152,13 +167,16 @@ public final class NewsAppUtilities {
         } catch (JSONException e) {
             // Se um erro for encontrado, ele irá jogar uma excessão e mostrar a mensagem abaixo
             // assim o app não irá travar
-            Log.e(LOG_TAG, "Problem parsing the book JSON results", e);
+            Log.e(LOG_TAG, "Problem parsing the news JSON results", e);
         }
 
         // Returna a lista com os Artigos
         return newsArticles;
     }
 
+    /**
+     * Retorna a lista dos {@link News} que foram retirados do resposta JSON criado pela URL
+     */
     static List<News> fetchNewsData(String requestURL) {
 
         URL urlRequest = createUrl(requestURL);
@@ -173,29 +191,77 @@ public final class NewsAppUtilities {
         return extractFeatureFromJson(jsonResponse);
     }
 
-    static String creatUrlFromQueryes(String section, String fromDate, String toDate, String orderBy, String pageSize, String search) {
+    /**
+     * Método para decodificar a URL com a imagem de thumbail e retornar um bitmap utilizavel pelo android
+     */
+    @Nullable
+    static Bitmap decodeThumbnailUrl(String thumbnailUrl) {
 
-        // URL base para criar a solicitação de acordo com os querys
-        final String GUARDIAN_API_REQUEST_URL = "http://content.guardianapis.com/search?";
+        try {
+            URL codedUrl = createUrl(thumbnailUrl);
+            HttpURLConnection imageUrlConnection = (HttpURLConnection) codedUrl.openConnection();
+            imageUrlConnection.setRequestMethod("GET");
+            imageUrlConnection.setReadTimeout(SET_READ_TIMEOUT_IN_MILISSECONDS);
+            imageUrlConnection.setConnectTimeout(SET_CONNECT_TIMEOUT_IN_MILISSECONDS);
+            imageUrlConnection.connect();
 
-        // URL base para criar a solicitação de acordo com os querys
-        final String GUARDIAN_API_REQUEST_KEY = "test";
+            if (imageUrlConnection.getResponseCode() == URL_CONNECTION_GET_RESPONSE_CODE) {
+                InputStream stream = imageUrlConnection.getInputStream();
+                Bitmap thumbnail = BitmapFactory.decodeStream(stream);
+                return  thumbnail;
+            } else {
+                Log.e(LOG_TAG, "Error response code: " + imageUrlConnection.getResponseCode());
+                return null;
+            }
 
-        // URL base para criar a solicitação de acordo com os querys
-        final String GUARDIAN_API_REQUEST_FIELDS = "thumbnail";
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "Problem decoding the thumbnail URL", e);
+            return null;
+        }
+    }
 
-        Uri baseUri = Uri.parse(GUARDIAN_API_REQUEST_URL);
+    /**
+     * Retorna a URL com os queries selecionados pelas opções no app
+     */
+    static String createUrlFromQueries(String section, String fromDate, String toDate, String orderBy, String pageSize, String search) {
+
+        Uri baseUri = Uri.parse( GUARDIAN_API_REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
-        uriBuilder.appendQueryParameter("section", section);
-        uriBuilder.appendQueryParameter("from-date", fromDate);
-        uriBuilder.appendQueryParameter("to-date", toDate);
-        uriBuilder.appendQueryParameter("order-by", orderBy);
-        uriBuilder.appendQueryParameter("show-fields", GUARDIAN_API_REQUEST_FIELDS);
-        uriBuilder.appendQueryParameter("page-size", pageSize);
-        uriBuilder.appendQueryParameter("q", search);
-        uriBuilder.appendQueryParameter("api-key", GUARDIAN_API_REQUEST_KEY);
+        // testa se existe cada query, caso contrario não usa esse parâmetro
+        if (!(section.isEmpty())){
+            uriBuilder.appendQueryParameter("section", section);
+        }
 
+        if (!(fromDate.isEmpty())){
+            uriBuilder.appendQueryParameter("from-date", fromDate);
+        }
+
+        if ((!toDate.isEmpty())){
+            uriBuilder.appendQueryParameter("to-date", toDate);
+        }
+
+        if ((!orderBy.isEmpty())){
+            uriBuilder.appendQueryParameter("order-by", orderBy);
+        }
+
+        // Query do thumbnail Field - sempre será presente
+        uriBuilder.appendQueryParameter("show-fields", GUARDIAN_API_REQUEST_FIELDS);
+
+        if ((!pageSize.isEmpty())){
+            uriBuilder.appendQueryParameter("page-size", pageSize);
+        }
+
+        if ((!search.isEmpty())){
+            uriBuilder.appendQueryParameter("q", search);
+        }
+
+        // Query do request Key - necessário para o funcionamento da API
+        uriBuilder.appendQueryParameter("api-key", GUARDIAN_API_REQUEST_KEY );
+
+        // retorna a URL com todas as queries
         return uriBuilder.toString();
     }
+
+
 }

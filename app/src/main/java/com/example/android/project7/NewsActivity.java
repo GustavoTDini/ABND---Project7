@@ -1,5 +1,7 @@
 package com.example.android.project7;
 
+import android.app.LoaderManager;
+import android.content.Loader;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -9,9 +11,44 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NewsActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements LoaderManager.LoaderCallbacks<List<News>>, NavigationView.OnNavigationItemSelectedListener{
+
+    /**
+     * Valor constante para o ID do loader das News
+     */
+    private static final int NEWS_LOADER_ID = 1;
+
+    /** Adapter da lista de earthquakes */
+    private NewsArrayAdapter mAdapter;
+
+    /** TextView que é mostrada quando ha um erro */
+    private TextView mErrorTextView;
+
+    /** ProgressBar que é mostrada enquanto conecção é realizada*/
+    private ProgressBar mLoadingBar;
+
+    private static final String EMPTY_QUERY = "";
+
+    private String mSection = EMPTY_QUERY;
+
+    private String mFromDate = EMPTY_QUERY;
+
+    private String mToDate = EMPTY_QUERY;
+
+    private String mOrderBy = EMPTY_QUERY;
+
+    private String mPageSize = EMPTY_QUERY;
+
+    private String mSearch = "news";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +65,29 @@ public class NewsActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // Find a reference to the {@link ListView} in the layout
+        ListView newsListView = findViewById(R.id.list);
+
+        // Create a new {@link ArrayAdapter} of earthquakes
+        mAdapter = new NewsArrayAdapter(this, new ArrayList<News>());
+
+        mLoadingBar = findViewById( R.id.loading_spinner );
+
+        // Set the adapter on the {@link ListView}
+        // so the list can be populated in the user interface
+        newsListView.setAdapter(mAdapter);
+
+        mErrorTextView = (TextView) findViewById(R.id.alert_message);
+        newsListView.setEmptyView(mErrorTextView);
+
+        // Obtém uma referência ao LoaderManager, a fim de interagir com loaders.
+        LoaderManager loaderManager = getLoaderManager();
+
+        // Inicializa o loader. Passa um ID constante int definido acima e passa nulo para
+        // o bundle. Passa esta activity para o parâmetro LoaderCallbacks (que é válido
+        // porque esta activity implementa a interface LoaderCallbacks).
+        loaderManager.initLoader(NEWS_LOADER_ID, null, this);
     }
 
     @Override
@@ -68,12 +128,40 @@ public class NewsActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_brasil_news) {
+        if (id == R.id.nav_world) {
             // Handle the camera action
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public Loader<List<News>> onCreateLoader(int i, Bundle bundle) {
+
+        String urlQuery = NewsAppUtilities.createUrlFromQueries(mSection,mFromDate,mToDate,mOrderBy,mPageSize,mSearch);
+
+        return new NewsListLoader(this, urlQuery);
+    }
+
+    public void onLoadFinished(Loader<List<News>> loader, List<News> earthquakes) {
+        // Seta o texto de estado vazio para mostrar "Nenhum terremoto encontrado."
+        mErrorTextView.setText(R.string.empty_return_list);
+
+        // Limpa o adapter de dados de earthquake anteriores
+        mAdapter.clear();
+
+        mLoadingBar.setVisibility( View.GONE );
+
+        // Se há uma lista válida de {@link Earthquake}s, então os adiciona ao data set do adapter.
+        // Isto ativará a atualização da ListView.
+        if (earthquakes != null && !earthquakes.isEmpty()) {
+            mAdapter.addAll(earthquakes);
+        }
+    }
+
+    public void onLoaderReset(Loader<List<News>> loader) {
+        // Reseta o Loader, então podemos limpar nossos dados existentes.
+        mAdapter.clear();
     }
 }
