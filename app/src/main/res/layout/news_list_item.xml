@@ -12,17 +12,19 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:contentDescription="@string/thumbnail_image"
+        android:minHeight="120dp"
         android:src="@drawable/news_placeholder" />
 
     <TextView
         android:id="@+id/news_title"
+        style="@style/TitleStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/news_thumbnail"
+        android:layout_alignParentEnd="true"
         android:layout_below="@+id/imageView2"
-        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
         android:layout_toEndOf="@+id/news_thumbnail"
-        android:text="headline"
+        android:minHeight="100dp"
         android:textSize="16sp" />
 
     <ImageView
@@ -36,31 +38,31 @@
 
     <TextView
         android:id="@+id/news_section"
+        style="@style/FieldsStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/news_thumbnail"
-        android:text="section"
+        android:layout_above="@+id/news_title"
+        android:layout_alignStart="@+id/news_title"
         android:textSize="12sp" />
 
     <TextView
         android:id="@+id/news_date"
+        style="@style/FieldsStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_above="@+id/news_title"
         android:layout_toStartOf="@+id/imageView2"
-        android:text="14-22-2018"
         android:textSize="12sp" />
 
     <TextView
         android:id="@+id/news_trail_text"
+        style="@style/FieldsStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/news_thumbnail"
+        android:layout_below="@+id/news_title"
         android:layout_marginTop="4dp"
-        android:text="trailtext blblbllblblblblbllblblblblbllblblbl"
         android:textSize="14sp" />
 
 

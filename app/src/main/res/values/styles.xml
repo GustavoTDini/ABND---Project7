@@ -24,10 +24,48 @@
         <item name="android:paddingTop">@dimen/nav_header_vertical_spacing</item>
     </style>
 
-    <style name="NavMenuGroups">
-        <item name="android:fontFamily">sans-serif</item>
-        <item name="android:textSize">14sp</item>
+    <style name="NavNewsGroup">
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/newsAccent</item>
+    </style>
+
+    <style name="NavOpinionGroup">
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/opinionsAccent</item>
+    </style>
+
+    <style name="NavSportGroup">
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/sportAccent</item>
+    </style>
+
+    <style name="NavCultureGroup">
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/cultureAccent</item>
+    </style>
+
+    <style name="NavLifeStyleGroup">
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/lifestyleAccent</item>
+    </style>
+
+    <style name="TitleStyle">
+        <item name="android:fontFamily">serif</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="FieldsStyle">
+        <item name="android:fontFamily">serif</item>
         <item name="android:textColor">@android:color/black</item>
     </style>
 

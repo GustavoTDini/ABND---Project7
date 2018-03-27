@@ -18,18 +18,20 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@android:color/white"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_news"
-        app:menu="@menu/activity_news_drawer"
-        android:background="@android:color/white">
+        app:itemTextAppearance="@color/colorPrimaryDark"
+        app:menu="@menu/activity_news_drawer">
 
         <android.support.design.widget.CheckableImageButton
-            android:padding="8dp"
+            android:id="@+id/powered_by_the_guardian_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/powered_by_the_guardian"
             android:layout_gravity="bottom"
-            android:background="@android:color/white"/>
+            android:background="@android:color/white"
+            android:padding="8dp"
+            android:src="@drawable/powered_by_the_guardian" />
 
     </android.support.design.widget.NavigationView>
 

@@ -5,8 +5,9 @@
 
     <group android:checkableBehavior="single">
 
-        <item android:title="@string/menu_news"
-            style="@styles/NavMenuGroup">
+        <item
+            android:id="@+id/news_nav_section"
+            android:title="@string/menu_news">
 
             <menu>
                 <item
@@ -14,73 +15,97 @@
                     android:icon="@drawable/ic_action_globe"
                     android:title="@string/menu_world" />
                 <item
-                    android:id="@+id/nav_us_news"
+                    android:id="@+id/nav_uk-news"
                     android:icon="@drawable/ic_action_flag"
-                    android:title="@string/menu_us_news" />
-                <item
-                    android:id="@+id/nav_environment"
-                    android:icon="@drawable/ic_action_grow"
-                    android:title="@string/menu_environment" />
+                    android:title="@string/menu_uk_news" />
                 <item
                     android:id="@+id/nav_business"
                     android:icon="@drawable/ic_action_business"
                     android:title="@string/menu_business" />
                 <item
-                    android:id="@+id/nav_tech"
-                    android:icon="@drawable/ic_memory"
-                    android:title="@string/menu_tech" />
+                    android:id="@+id/nav_politcs"
+                    android:icon="@drawable/ic_account_balance"
+                    android:title="@string/menu_politics" />
+                <item
+                    android:id="@+id/nav_environment"
+                    android:icon="@drawable/ic_action_grow"
+                    android:title="@string/menu_environment" />
+                <item
+                    android:id="@+id/nav_education"
+                    android:icon="@drawable/ic_action_tag"
+                    android:title="@string/menu_education" />
                 <item
                     android:id="@+id/nav_science"
                     android:icon="@drawable/ic_action_lab"
                     android:title="@string/menu_science" />
+                <item
+                    android:id="@+id/nav_tech"
+                    android:icon="@drawable/ic_memory"
+                    android:title="@string/menu_tech" />
+                <item
+                    android:id="@+id/nav_global"
+                    android:icon="@drawable/ic_language"
+                    android:title="@string/menu_global" />
+
             </menu>
 
         </item>
 
-        <item android:title="@string/menu_opinion"
-            style="@styles/NavMenuGroup">
+        <item
+            android:id="@+id/opinion_nav_section"
+            android:title="@string/menu_opinion">
 
             <menu>
                 <item
                     android:id="@+id/nav_the_guardian_view"
                     android:icon="@drawable/ic_action_news"
-                    android:title="@string/menu_the_guardian_view"/>
+                    android:title="@string/menu_the_guardian_view" />
             </menu>
 
         </item>
 
-        <item android:title="@string/menu_sport"
-            style="@styles/NavMenuGroup">
+        <item
+            android:id="@+id/sport_nav_section"
+            android:title="@string/menu_sport">
 
             <menu>
                 <item
                     android:id="@+id/nav_soccer"
                     android:icon="@drawable/ic_action_ball"
-                    android:title="@string/menu_soccer"/>
+                    android:title="@string/menu_football" />
                 <item
                     android:id="@+id/nav_other_sports"
-                    android:icon="@drawable/ic_action_ball"
+                    android:icon="@drawable/ic_directions_run"
                     android:title="@string/menu_other_sports" />
             </menu>
 
         </item>
 
-        <item android:title="@string/menu_culture"
-            style="@styles/NavMenuGroup">
+        <item
+            android:id="@+id/culture_nav_section"
+            android:title="@string/menu_culture">
 
             <menu>
                 <item
                     android:id="@+id/nav_film"
                     android:icon="@drawable/ic_action_movie"
-                    android:title="@string/menu_film"/>
+                    android:title="@string/menu_film" />
+                <item
+                    android:id="@+id/nav_music"
+                    android:icon="@drawable/ic_action_music_1"
+                    android:title="@string/menu_music" />
+                <item
+                    android:id="@+id/nav_tv_and_radio"
+                    android:icon="@drawable/ic_action_tv"
+                    android:title="@string/menu_tv_and_radio" />
                 <item
                     android:id="@+id/nav_books"
                     android:icon="@drawable/ic_action_book"
                     android:title="@string/menu_books" />
                 <item
-                    android:id="@+id/nav_music"
-                    android:icon="@drawable/ic_action_music_1"
-                    android:title="@string/menu_music" />
+                    android:id="@+id/nav_art_and_design"
+                    android:icon="@drawable/ic_palette"
+                    android:title="@string/menu_art_and_design" />
                 <item
                     android:id="@+id/nav_games"
                     android:icon="@drawable/ic_action_joypad"
@@ -89,34 +114,38 @@
 
         </item>
 
-        <item android:title="@string/menu_lifestyle"
-            style="@styles/NavMenuGroup">
+        <item
+            android:id="@+id/lifestyle_nav_section"
+            android:title="@string/menu_lifestyle">
 
             <menu>
                 <item
+                    android:id="@+id/nav_life_style"
+                    android:icon="@drawable/ic_action_yinyang"
+                    android:title="@string/menu_life_and_style" />
+                <item
                     android:id="@+id/nav_fashion"
                     android:icon="@drawable/ic_action_tshirt"
-                    android:title="@string/menu_fashion"/>
-                <item
-                    android:id="@+id/nav_life_style"
-                    android:icon="@drawable/ic_action_tshirt"
-                    android:title="@string/menu_fashion"/>
-
-                <item
-                    android:id="@+id/nav_society"
-                    android:icon="@drawable/ic_fitness_center"
-                    android:title="Society" />
+                    android:title="@string/menu_fashion" />
                 <item
                     android:id="@+id/nav_travel"
                     android:icon="@drawable/ic_beach_access"
                     android:title="@string/menu_travel" />
+                <item
+                    android:id="@+id/nav_money"
+                    android:icon="@drawable/ic_attach_money"
+                    android:title="@string/menu_money" />
+                <item
+                    android:id="@+id/nav_society"
+                    android:icon="@drawable/ic_action_users"
+                    android:title="@string/menu_society" />
             </menu>
 
         </item>
 
         <item
             android:id="@+id/nav_empty"
-            android:title=""/>
+            android:title="" />
 
     </group>
 

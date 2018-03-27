@@ -267,6 +267,8 @@ public final class NewsAppUtilities {
         uriBuilder.appendQueryParameter("api-key", GUARDIAN_API_REQUEST_KEY );
 
         // retorna a URL com todas as queries
+        Log.d("debug", "createUrlFromQueries: " + uriBuilder.toString());
+
         return uriBuilder.toString();
     }
 
