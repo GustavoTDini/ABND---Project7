@@ -2,48 +2,75 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="wrap_content"
+    android:minHeight="250dp"
     android:padding="4dp">
 
     <ImageView
-        android:contentDescription="@string/thumbnail_image"
+        android:id="@+id/news_thumbnail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/news_placeholder"
-        android:layout_centerInParent="true"
+        android:layout_height="230dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/thumbnail_image"
         android:scaleType="centerCrop"
-        android:id="@+id/news_list_thumbnail" />
+        android:src="@drawable/news_placeholder" />
 
     <TextView
-        android:id="@+id/news_list_title"
+        android:id="@+id/news_title"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/news_thumbnail"
+        android:layout_alignParentStart="true"
+        android:background="#66ffffff"
         android:gravity="bottom"
+        android:maxHeight="100dp"
+        android:text="HeadLine"
         android:textSize="20sp" />
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="bottom"
         android:text="@string/top_story"
-        android:textSize="14sp" />
+        android:textAllCaps="true"
+        android:textSize="16sp" />
 
     <ImageView
-        android:contentDescription="@string/open_in_browser_icon"
+        android:id="@+id/main_story_link"
         android:layout_width="18dp"
         android:layout_height="18dp"
-        android:layout_alignEnd="@+id/news_list_thumbnail"
-        android:layout_alignTop="@+id/news_list_thumbnail"
-        android:src="@drawable/ic_open_in_browser"
-        android:id="@+id/main_story_link" />
+        android:layout_alignEnd="@+id/news_thumbnail"
+        android:layout_alignTop="@+id/news_thumbnail"
+        android:contentDescription="@string/open_in_browser_icon"
+        android:src="@drawable/ic_open_in_browser" />
 
     <TextView
-        android:id="@+id/news_list_section"
+        android:id="@+id/news_section"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/main_story_link"
-        android:layout_toStartOf="@+id/main_story_link"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView"
+        android:text="section"
         android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/news_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_toStartOf="@+id/main_story_link"
+        android:text="14-22-2018"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/news_trail_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/news_thumbnail"
+        android:text="trailtext blblbllblblblblbllblblblblbllblblbl"
+        android:textSize="14sp" />
 
 </RelativeLayout>

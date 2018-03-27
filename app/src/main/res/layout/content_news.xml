@@ -7,10 +7,11 @@
     tools:showIn="@layout/app_bar_news">
 
     <ListView
-        android:layout_marginTop="56dp"
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
+        android:dividerHeight="5dp" />
 
     <TextView
         android:id="@+id/alert_message"

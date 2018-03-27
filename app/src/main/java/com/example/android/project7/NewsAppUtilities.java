@@ -1,12 +1,11 @@
 package com.example.android.project7;
 
-import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -41,7 +40,7 @@ public final class NewsAppUtilities {
 
     private static final String GUARDIAN_API_REQUEST_KEY = "test";
 
-    private static final String GUARDIAN_API_REQUEST_FIELDS = "thumbnail";
+    private static final String GUARDIAN_API_REQUEST_FIELDS = "thumbnail,trailText";
 
     /**
      * Tag for the log messages
@@ -157,11 +156,16 @@ public final class NewsAppUtilities {
                 String newsTitle = thisNewsArticle.optString("webTitle");
                 String newsSection = thisNewsArticle.optString("sectionName");
                 String newsUrl = thisNewsArticle.optString("webUrl");
+                String newsDatefromJson = thisNewsArticle.optString("webPublicationDate");
+                String newsDate = newsDatefromJson.substring(0, 10);
 
                 JSONObject fields = thisNewsArticle.getJSONObject( "fields" );
-                String newsThumbnailUrl =fields.getString( "thumbnail" );
+                String newsThumbnailUrl = fields.optString("thumbnail");
+                String newsTrailTextHtml = fields.optString("trailText");
 
-                newsArticles.add(new News(newsTitle, newsSection, newsUrl, newsThumbnailUrl));
+                String newsTrailText = Html.fromHtml(newsTrailTextHtml).toString();
+
+                newsArticles.add(new News(newsTitle, newsSection, newsUrl, newsThumbnailUrl, newsDate, newsTrailText));
             }
 
         } catch (JSONException e) {
@@ -197,6 +201,10 @@ public final class NewsAppUtilities {
     @Nullable
     static Bitmap decodeThumbnailUrl(String thumbnailUrl) {
 
+        if (thumbnailUrl == null) {
+            return null;
+        }
+
         try {
             URL codedUrl = createUrl(thumbnailUrl);
             HttpURLConnection imageUrlConnection = (HttpURLConnection) codedUrl.openConnection();
@@ -207,8 +215,7 @@ public final class NewsAppUtilities {
 
             if (imageUrlConnection.getResponseCode() == URL_CONNECTION_GET_RESPONSE_CODE) {
                 InputStream stream = imageUrlConnection.getInputStream();
-                Bitmap thumbnail = BitmapFactory.decodeStream(stream);
-                return  thumbnail;
+                return BitmapFactory.decodeStream(stream);
             } else {
                 Log.e(LOG_TAG, "Error response code: " + imageUrlConnection.getResponseCode());
                 return null;
