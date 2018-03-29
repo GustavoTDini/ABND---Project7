@@ -28,7 +28,7 @@ import java.util.List;
  * Classe que irá manter os métodos auxiliares que irão facilitar o desenvolvimento e deixar o código mais limpo
  */
 
-public final class NewsAppUtilities {
+final class NewsAppUtilities {
 
     private static final int URL_CONNECTION_GET_RESPONSE_CODE = 200;
 
@@ -47,8 +47,10 @@ public final class NewsAppUtilities {
      */
     private static final String LOG_TAG = NewsAppUtilities.class.getSimpleName();
 
-    /** Construtor vazio para a classe*/
-    public NewsAppUtilities() {
+    /**
+     * Construtor vazio para a classe
+     */
+    private NewsAppUtilities() {
     }
 
     /**
@@ -143,11 +145,11 @@ public final class NewsAppUtilities {
 
             JSONObject root = new JSONObject(newsJson);
 
-            JSONObject response = root.getJSONObject( "response" );
+            JSONObject response = root.getJSONObject("response");
 
             JSONArray newsArticleArray = response.getJSONArray("results");
 
-            int listSize = response.getInt( "pageSize" );
+            int listSize = response.getInt("pageSize");
 
             for (int newsIndex = 0; newsIndex < listSize; newsIndex++) {
 
@@ -159,7 +161,7 @@ public final class NewsAppUtilities {
                 String newsDatefromJson = thisNewsArticle.optString("webPublicationDate");
                 String newsDate = newsDatefromJson.substring(0, 10);
 
-                JSONObject fields = thisNewsArticle.getJSONObject( "fields" );
+                JSONObject fields = thisNewsArticle.getJSONObject("fields");
                 String newsThumbnailUrl = fields.optString("thumbnail");
                 String newsTrailTextHtml = fields.optString("trailText");
 
@@ -232,44 +234,65 @@ public final class NewsAppUtilities {
      */
     static String createUrlFromQueries(String section, String fromDate, String toDate, String orderBy, String pageSize, String search) {
 
-        Uri baseUri = Uri.parse( GUARDIAN_API_REQUEST_URL);
+        Uri baseUri = Uri.parse(GUARDIAN_API_REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
         // testa se existe cada query, caso contrario não usa esse parâmetro
-        if (!(section.isEmpty())){
+        if (!(section.isEmpty())) {
             uriBuilder.appendQueryParameter("section", section);
         }
 
-        if (!(fromDate.isEmpty())){
+        if (!(fromDate.isEmpty())) {
             uriBuilder.appendQueryParameter("from-date", fromDate);
         }
 
-        if ((!toDate.isEmpty())){
+        if ((!toDate.isEmpty())) {
             uriBuilder.appendQueryParameter("to-date", toDate);
         }
 
-        if ((!orderBy.isEmpty())){
+        if ((!orderBy.isEmpty())) {
             uriBuilder.appendQueryParameter("order-by", orderBy);
         }
 
-        // Query do thumbnail Field - sempre será presente
+        // Query do thumbnail e TrailText Fields - sempre será presente
         uriBuilder.appendQueryParameter("show-fields", GUARDIAN_API_REQUEST_FIELDS);
 
-        if ((!pageSize.isEmpty())){
+        if ((!pageSize.isEmpty())) {
             uriBuilder.appendQueryParameter("page-size", pageSize);
         }
 
-        if ((!search.isEmpty())){
+        if ((!search.isEmpty())) {
             uriBuilder.appendQueryParameter("q", search);
         }
 
         // Query do request Key - necessário para o funcionamento da API
-        uriBuilder.appendQueryParameter("api-key", GUARDIAN_API_REQUEST_KEY );
+        uriBuilder.appendQueryParameter("api-key", GUARDIAN_API_REQUEST_KEY);
 
         // retorna a URL com todas as queries
-        Log.d("debug", "createUrlFromQueries: " + uriBuilder.toString());
-
         return uriBuilder.toString();
+    }
+
+    /**
+     * Metodo usado para testar de uma data é anterior a outra, usada no caso das preferences,
+     * para não ocasionar uma lista vazia, se a data final for menor que a data inicial
+     */
+    static boolean compareDates(String fromDate, String toDate) {
+        // retira de cada String o numero correspondente de anos, mes e dias
+        int fromYear = Integer.parseInt(fromDate.substring(0, 3));
+        int toYear = Integer.parseInt(toDate.substring(0, 3));
+        int fromMonth = Integer.parseInt(fromDate.substring(5, 6));
+        int toMonth = Integer.parseInt(toDate.substring(5, 6));
+        int fromDay = Integer.parseInt(fromDate.substring(8, 9));
+        int toDay = Integer.parseInt(toDate.substring(8, 9));
+        if (toYear > fromYear) {
+            return false;
+        } else if (toMonth > fromMonth) {
+            return false;
+        } else if (toDay > fromDay) {
+            return false;
+        }
+
+        return true;
     }
 
 

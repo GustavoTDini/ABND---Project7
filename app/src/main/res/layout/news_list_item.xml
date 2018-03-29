@@ -21,14 +21,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/imageView2"
+        android:layout_below="@+id/news_section"
         android:layout_marginStart="4dp"
         android:layout_toEndOf="@+id/news_thumbnail"
         android:minHeight="100dp"
         android:textSize="16sp" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/open_in_browser_icon"
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:layout_alignParentEnd="true"
@@ -41,8 +41,8 @@
         style="@style/FieldsStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/news_title"
         android:layout_alignStart="@+id/news_title"
+        android:maxWidth="80dp"
         android:textSize="12sp" />
 
     <TextView
@@ -50,8 +50,8 @@
         style="@style/FieldsStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/news_title"
-        android:layout_toStartOf="@+id/imageView2"
+        android:layout_alignTop="@+id/open_in_browser_icon"
+        android:layout_toStartOf="@+id/open_in_browser_icon"
         android:textSize="12sp" />
 
     <TextView

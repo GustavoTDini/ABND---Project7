@@ -143,9 +143,7 @@
 
         </item>
 
-        <item
-            android:id="@+id/nav_empty"
-            android:title="" />
+        <item android:title="" />
 
     </group>
 

@@ -13,6 +13,7 @@
     <string name="open_in_browser_icon">Open in Browser Icon</string>
     <string name="empty_return_list">Your Search Return no Results</string>
     <string name="no_internet_connection">No Internet Connection!</string>
+    <string name="toast_date_message">The From Date cannot be higher than the To Date</string>
 
     <string name="menu_news">News</string>
     <string name="menu_world">world</string>
@@ -48,17 +49,35 @@
     <string name="menu_society">Society</string>
 
 
-    <string name="action_settings">Settings</string>
-    <string name="settings_news_order">News Order:</string>
-    <string name="settings_list_size">List Size:</string>
-    <string name="settings_from_date">From Date:</string>
-    <string name="settings_to_date">To Date:</string>
+    <string name="menu_settings">Settings</string>
+    <string name="settings_title">News Settings</string>
 
+    <string name="empty_default"></string>
 
+    <string name="settings_list_size_label">News List Size</string>
+    <string name="settings_list_size_key" translatable="false">list_size</string>
+    <string name="settings_list_size_default" translatable="false">10</string>
 
-    <string name="GUARDIAN_API_REQUEST_URL">http://content.guardianapis.com/search?</string>
-    <string name="GUARDIAN_API_REQUEST_KEY">test</string>
-    <string name="GUARDIAN_API_REQUEST_FIELDS">thumbnail</string>
+    <string name="settings_from_date_label">News From Date</string>
+    <string name="settings_from_date_key" translatable="false">from_date</string>
+    <string name="settings_from_date_default" translatable="false">@string/empty_default</string>
+
+    <string name="settings_to_date_label">News to Date</string>
+    <string name="settings_to_date_key" translatable="false">to_date</string>
+    <string name="settings_to_date_default" translatable="false">@string/empty_default</string>
+
+    <string name="settings_order_by_label">Order By</string>
+    <string name="settings_order_by_key" translatable="false">order_by</string>
+    <string name="settings_order_by_default" translatable="false">@string/empty_default</string>
+
+    <string name="settings_order_by_newest_label">Newest</string>
+    <string name="settings_order_by_newest_value" translatable="false">newest</string>
+
+    <string name="settings_order_by_oldest_label">Oldest</string>
+    <string name="settings_order_by_oldest_value" translatable="false">oldest</string>
+
+    <string name="settings_order_by_relevance_label">Relevance</string>
+    <string name="settings_order_by_relevance_value" translatable="false">relevance</string>
 
 
 </resources>

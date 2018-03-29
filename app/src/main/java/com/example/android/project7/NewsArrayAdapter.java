@@ -20,16 +20,22 @@ import java.util.List;
  * Classe que cria a lista para mostrar as noticias,
  */
 
-public class NewsArrayAdapter extends ArrayAdapter<News>  {
+class NewsArrayAdapter extends ArrayAdapter<News> {
 
+    /**
+     * ints para ser utilizados na definição de qual layout será utilizado, e o numero total de layouts
+     */
     private static final int TYPE_LIST_ITEM = 0;
     private static final int TYPE_MAIN_STORY = 1;
     private static final int TYPE_COUNT = 2;
 
-    private int mColorCode;
+    /**
+     * cor dos detalhes da noticia
+     */
+    private final int mColorCode;
 
     public NewsArrayAdapter(Activity context, List<News> newsList, int textColorCode) {
-        super( context, 0, newsList );
+        super(context, 0, newsList);
         mColorCode = textColorCode;
     }
 
@@ -38,11 +44,13 @@ public class NewsArrayAdapter extends ArrayAdapter<News>  {
         return TYPE_COUNT;
     }
 
+    /**
+     * testa para ver se a lista é a primeira
+     */
     @Override
     public int getItemViewType(int position) {
         return (position == 0 ? TYPE_MAIN_STORY : TYPE_LIST_ITEM);
     }
-
 
 
     @NonNull
@@ -51,35 +59,36 @@ public class NewsArrayAdapter extends ArrayAdapter<News>  {
 
         View newsArticleView = convertView;
         ViewHolder holder = null;
-        int viewType = getItemViewType( position );
+        int viewType = getItemViewType(position);
 
-        if (newsArticleView == null){
-            switch (viewType){
+        // caso a noticia seja a primeira da lista, ela irá ser mostrada em um view maior, com maior destaque, senão, será inflado a lista padrão
+        if (newsArticleView == null) {
+            switch (viewType) {
                 case TYPE_LIST_ITEM:
-                    newsArticleView = LayoutInflater.from(getContext()).inflate( R.layout.news_list_item, parent, false);
-                    holder = new ViewHolder( newsArticleView );
-                    newsArticleView.setTag( holder );
+                    newsArticleView = LayoutInflater.from(getContext()).inflate(R.layout.news_list_item, parent, false);
+                    holder = new ViewHolder(newsArticleView);
+                    newsArticleView.setTag(holder);
 
                     break;
                 case TYPE_MAIN_STORY:
-                    newsArticleView = LayoutInflater.from(getContext()).inflate( R.layout.main_story_layout, parent, false);
-                    holder = new ViewHolder( newsArticleView );
-                    newsArticleView.setTag( holder );
+                    newsArticleView = LayoutInflater.from(getContext()).inflate(R.layout.main_story_layout, parent, false);
+                    holder = new ViewHolder(newsArticleView);
+                    newsArticleView.setTag(holder);
                     break;
             }
 
-        } else{
+        } else {
             holder = (ViewHolder) newsArticleView.getTag();
         }
 
-        News newsArticle = getItem( position );
+        News newsArticle = getItem(position);
         assert newsArticle != null;
 
         int colorId = ContextCompat.getColor(getContext(), mColorCode);
 
-        holder.title.setText( newsArticle.getNewsTitle());
+        holder.title.setText(newsArticle.getNewsTitle());
         holder.title.setTextColor(colorId);
-        holder.section.setText( newsArticle.getNewsSection());
+        holder.section.setText(newsArticle.getNewsSection());
         holder.section.setTextColor(colorId);
         holder.date.setText(newsArticle.getNewsDate());
         holder.trailText.setText(newsArticle.getNewsTrailText());
@@ -88,9 +97,12 @@ public class NewsArrayAdapter extends ArrayAdapter<News>  {
         return newsArticleView;
     }
 
+    /**
+     * Metodo Async para baixar as imagens
+     */
     public static class AsyncDownloadImage extends AsyncTask<String, Void, Bitmap> {
 
-        private ImageView bmpImage;
+        private final ImageView bmpImage;
 
         private AsyncDownloadImage(ImageView bmImage) {
             this.bmpImage = bmImage;
@@ -106,6 +118,9 @@ public class NewsArrayAdapter extends ArrayAdapter<News>  {
         }
     }
 
+    /**
+     * Holder que irá guardar os views que serão modificados na cricão da lista
+     */
     public class ViewHolder {
 
         final TextView title;

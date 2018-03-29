@@ -5,29 +5,37 @@ package com.example.android.project7;
  * do app, apresenta 6 variaveis do tipo string, titulo, section, url e thumbnailurl, data e trailText
  */
 
-public class News {
+class News {
 
-    /** String que contem o titulo da materia */
-    private String mNewsTitle;
+    /**
+     * String que contem o titulo da materia
+     */
+    private final String mNewsTitle;
 
-    /** String que contem a section relativo a materia */
-    private String mNewsSection;
+    /**
+     * String que contem a section relativo a materia
+     */
+    private final String mNewsSection;
 
-    /** String que contem a URL do site do the guardian da  materia */
-    private String mNewsUrl;
+    /**
+     * String que contem a URL do site do the guardian da  materia
+     */
+    private final String mNewsUrl;
 
-    /** String que contem a imagem de thumbnail */
-    private String mNewsThumbnailUrl;
+    /**
+     * String que contem a imagem de thumbnail
+     */
+    private final String mNewsThumbnailUrl;
 
     /**
      * String que contem a data do artigo,
      */
-    private String mNewsDate;
+    private final String mNewsDate;
 
     /**
      * String que contem a trailText
      */
-    private String mNewsTrailText;
+    private final String mNewsTrailText;
 
     public News(String newsTitle, String newsSection, String newsUrl, String newsThumbnailUrl, String newsDate, String newsTrailText) {
         this.mNewsTitle = newsTitle;
