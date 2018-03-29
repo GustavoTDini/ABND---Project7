@@ -20,7 +20,6 @@ public class DatePreference extends DialogPreference {
      */
     private DatePicker picker;
     private CharSequence mSummary;
-    private String dateToString;
 
     public DatePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -54,10 +53,10 @@ public class DatePreference extends DialogPreference {
 
             // cria um date format no padrão do query
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            dateToString = format.format(calendar.getTime());
+            String dateToString = format.format( calendar.getTime() );
 
-            if (callChangeListener(dateToString)) {
-                persistString(dateToString);
+            if (callChangeListener( dateToString )) {
+                persistString( dateToString );
             }
         }
     }

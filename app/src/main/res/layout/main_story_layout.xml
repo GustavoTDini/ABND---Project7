@@ -10,7 +10,6 @@
         android:id="@+id/news_thumbnail"
         android:layout_width="match_parent"
         android:layout_height="230dp"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/textView"
         android:contentDescription="@string/thumbnail_image"
         android:scaleType="centerCrop"
@@ -21,12 +20,23 @@
         style="@style/TitleStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/news_thumbnail"
+        android:layout_above="@+id/news_byline"
         android:layout_alignParentStart="true"
         android:background="@color/mainStoryTitleTransparency"
         android:gravity="bottom"
         android:maxHeight="100dp"
         android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/news_byline"
+        style="@style/TitleStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/news_thumbnail"
+        android:layout_alignParentStart="true"
+        android:background="@color/mainStoryTitleTransparency"
+        android:textAlignment="textEnd"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/textView"

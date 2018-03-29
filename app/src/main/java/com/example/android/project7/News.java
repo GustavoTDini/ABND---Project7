@@ -33,17 +33,23 @@ class News {
     private final String mNewsDate;
 
     /**
+     * String que contem o nome do Author
+     */
+    private final String mNewsByline;
+
+    /**
      * String que contem a trailText
      */
     private final String mNewsTrailText;
 
-    public News(String newsTitle, String newsSection, String newsUrl, String newsThumbnailUrl, String newsDate, String newsTrailText) {
+    public News(String newsTitle, String newsSection, String newsUrl, String newsThumbnailUrl, String newsDate, String newsTrailText, String newsByLine) {
         this.mNewsTitle = newsTitle;
         this.mNewsSection = newsSection;
         this.mNewsUrl = newsUrl;
         this.mNewsThumbnailUrl = newsThumbnailUrl;
         this.mNewsDate = newsDate;
         this.mNewsTrailText = newsTrailText;
+        this.mNewsByline = newsByLine;
     }
 
     public String getNewsTitle() {
@@ -68,6 +74,10 @@ class News {
 
     public String getNewsTrailText() {
         return mNewsTrailText;
+    }
+
+    public String getNewsByLine() {
+        return mNewsByline;
     }
 
 }

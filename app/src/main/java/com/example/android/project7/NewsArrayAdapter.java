@@ -13,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 
@@ -32,11 +34,17 @@ class NewsArrayAdapter extends ArrayAdapter<News> {
     /**
      * cor dos detalhes da noticia
      */
-    private final int mColorCode;
+    private final int mTextColorCode;
 
-    public NewsArrayAdapter(Activity context, List<News> newsList, int textColorCode) {
+    /**
+     * cor escura dos detalhes da noticia
+     */
+    private final int mTextDarkColorCode;
+
+    public NewsArrayAdapter(Activity context, List <News> newsList, int textDarkColorCode, int textColorCode) {
         super(context, 0, newsList);
-        mColorCode = textColorCode;
+        mTextColorCode = textColorCode;
+        mTextDarkColorCode = textDarkColorCode;
     }
 
     @Override
@@ -84,15 +92,21 @@ class NewsArrayAdapter extends ArrayAdapter<News> {
         News newsArticle = getItem(position);
         assert newsArticle != null;
 
-        int colorId = ContextCompat.getColor(getContext(), mColorCode);
+        int darkColorId = ContextCompat.getColor( getContext(), mTextDarkColorCode );
+        int colorId = ContextCompat.getColor( getContext(), mTextColorCode );
 
         holder.title.setText(newsArticle.getNewsTitle());
-        holder.title.setTextColor(colorId);
+        holder.title.setTextColor( darkColorId );
         holder.section.setText(newsArticle.getNewsSection());
         holder.section.setTextColor(colorId);
         holder.date.setText(newsArticle.getNewsDate());
         holder.trailText.setText(newsArticle.getNewsTrailText());
-        new AsyncDownloadImage(holder.thumbnail).execute(newsArticle.getmNewsThumbnailUrl());
+        holder.byline.setText( newsArticle.getNewsByLine() );
+        holder.byline.setTextColor( colorId );
+
+        String thumbNailUrl = newsArticle.getmNewsThumbnailUrl();
+
+        new AsyncDownloadImage( holder.thumbnail ).execute( thumbNailUrl );
 
         return newsArticleView;
     }
@@ -102,19 +116,27 @@ class NewsArrayAdapter extends ArrayAdapter<News> {
      */
     public static class AsyncDownloadImage extends AsyncTask<String, Void, Bitmap> {
 
-        private final ImageView bmpImage;
+        private final WeakReference <ImageView> bmpImage;
 
         private AsyncDownloadImage(ImageView bmImage) {
-            this.bmpImage = bmImage;
+            bmpImage = new WeakReference <>( bmImage );
         }
 
         protected Bitmap doInBackground(String... urls) {
-            return NewsAppUtilities.decodeThumbnailUrl(urls[0]);
+            try {
+                return NewsAppUtilities.decodeThumbnailUrl( urls[0] );
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
+            return null;
         }
 
         protected void onPostExecute(Bitmap result) {
-            bmpImage.setImageBitmap(result);
+            final ImageView imageView = bmpImage.get();
+            if (imageView != null) {
+                imageView.setImageBitmap( result );
+            }
         }
     }
 
@@ -128,13 +150,15 @@ class NewsArrayAdapter extends ArrayAdapter<News> {
         final ImageView thumbnail;
         final TextView date;
         final TextView trailText;
+        final TextView byline;
 
-        public ViewHolder(View view) {
+        private ViewHolder(View view) {
             title = view.findViewById(R.id.news_title);
             section = view.findViewById(R.id.news_section);
             thumbnail = view.findViewById(R.id.news_thumbnail);
             date = view.findViewById(R.id.news_date);
             trailText = view.findViewById(R.id.news_trail_text);
+            byline = view.findViewById( R.id.news_byline );
         }
 
     }

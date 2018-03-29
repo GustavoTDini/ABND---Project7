@@ -81,16 +81,16 @@ public class NewsActivity extends AppCompatActivity
      * ProgressBar que é mostrada enquanto a conexão é realizada
      */
     private ProgressBar mLoadingBar;
-    /**
-     * Criação das variaveis que irão criar a url de query das noticias
-     */
+
+
     private String mSection = EMPTY_QUERY;
     private String mFromDate = EMPTY_QUERY;
     private String mToDate = EMPTY_QUERY;
     private String mOrderBy = EMPTY_QUERY;
     private String mPageSize = EMPTY_QUERY;
     private String mSearch = "news";
-    private int mHighlightColorId = R.color.colorPrimaryDark;
+    private int mDarkHighlightColorId = R.color.colorPrimaryDark;
+    private int mHighlightColorId = R.color.colorPrimary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,8 +152,7 @@ public class NewsActivity extends AppCompatActivity
         poweredByTheGuardian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(GUARDIAN_WEB_HTTP));
-                startActivity(browserIntent);
+                startActivity( new Intent( Intent.ACTION_VIEW, Uri.parse( GUARDIAN_WEB_HTTP ) ) );
             }
         });
 
@@ -203,7 +202,7 @@ public class NewsActivity extends AppCompatActivity
                 getString(R.string.settings_to_date_default));
 
         // testa se a data toDate é maior que fromDate, caso seja, define a toDate em vazio e mostra um alerta com um toast
-        if (NewsAppUtilities.compareDates(mFromDate, mToDate)) {
+        if (!mToDate.isEmpty() && !mFromDate.isEmpty() && NewsAppUtilities.compareDates( mFromDate, mToDate )) {
             Toast.makeText(this, getResources().getString(R.string.toast_date_message), Toast.LENGTH_SHORT).show();
             mToDate = EMPTY_QUERY;
         }
@@ -253,73 +252,73 @@ public class NewsActivity extends AppCompatActivity
 
         switch (id) {
             case R.id.nav_world:
-                navDrawerSectionSelection(0, R.color.newsAccentDark);
+                navDrawerSectionSelection( 0, R.color.newsAccentDark, R.color.newsAccent );
                 break;
             case R.id.nav_uk_news:
-                navDrawerSectionSelection(1, R.color.newsAccentDark);
+                navDrawerSectionSelection( 1, R.color.newsAccentDark, R.color.newsAccent );
                 break;
             case R.id.nav_business:
-                navDrawerSectionSelection(2, R.color.newsAccentDark);
+                navDrawerSectionSelection( 2, R.color.newsAccentDark, R.color.newsAccent );
                 break;
             case R.id.nav_politcs:
-                navDrawerSectionSelection(3, R.color.newsAccentDark);
+                navDrawerSectionSelection( 3, R.color.newsAccentDark, R.color.newsAccent );
                 break;
             case R.id.nav_environment:
-                navDrawerSectionSelection(4, R.color.newsAccentDark);
+                navDrawerSectionSelection( 4, R.color.newsAccentDark, R.color.newsAccent );
                 break;
             case R.id.nav_education:
-                navDrawerSectionSelection(5, R.color.newsAccentDark);
+                navDrawerSectionSelection( 5, R.color.newsAccentDark, R.color.newsAccent );
                 break;
             case R.id.nav_science:
-                navDrawerSectionSelection(6, R.color.newsAccentDark);
+                navDrawerSectionSelection( 6, R.color.newsAccentDark, R.color.newsAccent );
                 break;
             case R.id.nav_tech:
-                navDrawerSectionSelection(7, R.color.newsAccentDark);
+                navDrawerSectionSelection( 7, R.color.newsAccentDark, R.color.newsAccent );
                 break;
             case R.id.nav_global:
-                navDrawerSectionSelection(8, R.color.newsAccentDark);
+                navDrawerSectionSelection( 8, R.color.newsAccentDark, R.color.newsAccent );
                 break;
             case R.id.nav_the_guardian_view:
-                navDrawerSectionSelection(9, R.color.opinionsAccentDark);
+                navDrawerSectionSelection( 9, R.color.opinionsAccentDark, R.color.opinionsAccent );
                 break;
             case R.id.nav_soccer:
-                navDrawerSectionSelection(10, R.color.sportAccentDark);
+                navDrawerSectionSelection( 10, R.color.sportAccentDark, R.color.sportAccent );
                 break;
             case R.id.nav_other_sports:
-                navDrawerSectionSelection(11, R.color.sportAccentDark);
+                navDrawerSectionSelection( 11, R.color.sportAccentDark, R.color.sportAccent );
                 break;
             case R.id.nav_film:
-                navDrawerSectionSelection(12, R.color.cultureAccentDark);
+                navDrawerSectionSelection( 12, R.color.cultureAccentDark, R.color.cultureAccent );
                 break;
             case R.id.nav_music:
-                navDrawerSectionSelection(13, R.color.cultureAccentDark);
+                navDrawerSectionSelection( 13, R.color.cultureAccentDark, R.color.cultureAccent );
                 break;
             case R.id.nav_tv_and_radio:
-                navDrawerSectionSelection(14, R.color.cultureAccentDark);
+                navDrawerSectionSelection( 14, R.color.cultureAccentDark, R.color.cultureAccent );
                 break;
             case R.id.nav_books:
-                navDrawerSectionSelection(15, R.color.cultureAccentDark);
+                navDrawerSectionSelection( 15, R.color.cultureAccentDark, R.color.cultureAccent );
                 break;
             case R.id.nav_art_and_design:
-                navDrawerSectionSelection(16, R.color.cultureAccentDark);
+                navDrawerSectionSelection( 16, R.color.cultureAccentDark, R.color.cultureAccent );
                 break;
             case R.id.nav_games:
-                navDrawerSectionSelection(17, R.color.cultureAccentDark);
+                navDrawerSectionSelection( 17, R.color.cultureAccentDark, R.color.cultureAccent );
                 break;
             case R.id.nav_life_style:
-                navDrawerSectionSelection(18, R.color.lifestyleAccentDark);
+                navDrawerSectionSelection( 18, R.color.lifestyleAccentDark, R.color.lifestyleAccent );
                 break;
             case R.id.nav_fashion:
-                navDrawerSectionSelection(19, R.color.lifestyleAccentDark);
+                navDrawerSectionSelection( 19, R.color.lifestyleAccentDark, R.color.lifestyleAccent );
                 break;
             case R.id.nav_travel:
-                navDrawerSectionSelection(20, R.color.lifestyleAccentDark);
+                navDrawerSectionSelection( 20, R.color.lifestyleAccentDark, R.color.lifestyleAccent );
                 break;
             case R.id.nav_money:
-                navDrawerSectionSelection(21, R.color.lifestyleAccentDark);
+                navDrawerSectionSelection( 21, R.color.lifestyleAccentDark, R.color.lifestyleAccent );
                 break;
             case R.id.nav_society:
-                navDrawerSectionSelection(22, R.color.lifestyleAccentDark);
+                navDrawerSectionSelection( 22, R.color.lifestyleAccentDark, R.color.lifestyleAccent );
                 break;
         }
 
@@ -382,7 +381,7 @@ public class NewsActivity extends AppCompatActivity
         newsListView.setDividerHeight(DIVIDER_HEIGHT);
 
         // Create a new {@link ArrayAdapter} of News
-        mAdapter = new NewsArrayAdapter(this, new ArrayList<News>(), mHighlightColorId);
+        mAdapter = new NewsArrayAdapter( this, new ArrayList <News>(), mDarkHighlightColorId, mHighlightColorId );
 
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface
@@ -397,10 +396,11 @@ public class NewsActivity extends AppCompatActivity
      * Metodo para criar a lista a partir do NavDrawer, ele pega a section pelo array, pega a cor da section, cria uma nova listView,
      * esvazia a mSearch, define o mSection e a cor de detalhes conforme a escolha e cria uma nova lista com essas informações
      */
-    private void navDrawerSectionSelection(int selectedSection, int sectionColor) {
+    private void navDrawerSectionSelection(int selectedSection, int sectionDarkColor, int sectionColor) {
         newsListView = findViewById(R.id.list);
         mSearch = EMPTY_QUERY;
         mSection = sections[selectedSection];
+        mDarkHighlightColorId = sectionDarkColor;
         mHighlightColorId = sectionColor;
         createNewsList(newsListView);
         connectionTest(LOADER_RESTART);
@@ -413,7 +413,8 @@ public class NewsActivity extends AppCompatActivity
     private void doMySearch(String query) {
         newsListView = findViewById(R.id.list);
         mSearch = query;
-        mHighlightColorId = R.color.colorPrimaryDark;
+        mDarkHighlightColorId = R.color.colorPrimaryDark;
+        mHighlightColorId = R.color.colorPrimary;
         createNewsList(newsListView);
         connectionTest(LOADER_RESTART);
     }

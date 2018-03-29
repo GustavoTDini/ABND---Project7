@@ -40,7 +40,7 @@ final class NewsAppUtilities {
 
     private static final String GUARDIAN_API_REQUEST_KEY = "test";
 
-    private static final String GUARDIAN_API_REQUEST_FIELDS = "thumbnail,trailText";
+    private static final String GUARDIAN_API_REQUEST_FIELDS = "trailText,thumbnail,byline,headline";
 
     /**
      * Tag for the log messages
@@ -95,7 +95,7 @@ final class NewsAppUtilities {
             }
 
         } catch (IOException e) {
-            Log.e(LOG_TAG, "");
+            Log.e( LOG_TAG, " Problem in makeHttpRequest" + e );
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -155,7 +155,7 @@ final class NewsAppUtilities {
 
                 JSONObject thisNewsArticle = newsArticleArray.getJSONObject(newsIndex);
 
-                String newsTitle = thisNewsArticle.optString("webTitle");
+
                 String newsSection = thisNewsArticle.optString("sectionName");
                 String newsUrl = thisNewsArticle.optString("webUrl");
                 String newsDatefromJson = thisNewsArticle.optString("webPublicationDate");
@@ -164,10 +164,15 @@ final class NewsAppUtilities {
                 JSONObject fields = thisNewsArticle.getJSONObject("fields");
                 String newsThumbnailUrl = fields.optString("thumbnail");
                 String newsTrailTextHtml = fields.optString("trailText");
+                String newsBylineHtml = fields.optString( "byline" );
+                String newsTitleHtml = fields.optString( "headline" );
 
+
+                String newsTitle = Html.fromHtml( newsTitleHtml ).toString();
                 String newsTrailText = Html.fromHtml(newsTrailTextHtml).toString();
+                String newsByline = Html.fromHtml( newsBylineHtml ).toString();
 
-                newsArticles.add(new News(newsTitle, newsSection, newsUrl, newsThumbnailUrl, newsDate, newsTrailText));
+                newsArticles.add( new News( newsTitle, newsSection, newsUrl, newsThumbnailUrl, newsDate, newsTrailText, newsByline ) );
             }
 
         } catch (JSONException e) {
@@ -201,33 +206,46 @@ final class NewsAppUtilities {
      * Método para decodificar a URL com a imagem de thumbail e retornar um bitmap utilizavel pelo android
      */
     @Nullable
-    static Bitmap decodeThumbnailUrl(String thumbnailUrl) {
+    static Bitmap decodeThumbnailUrl(String thumbnailUrl) throws IOException {
+        Bitmap decodedImage;
+        URL codedUrl = createUrl( thumbnailUrl );
 
-        if (thumbnailUrl == null) {
+        if (codedUrl == null) {
             return null;
         }
 
+        HttpURLConnection imageUrlConnection = null;
+        InputStream stream = null;
         try {
-            URL codedUrl = createUrl(thumbnailUrl);
-            HttpURLConnection imageUrlConnection = (HttpURLConnection) codedUrl.openConnection();
+            imageUrlConnection = (HttpURLConnection) codedUrl.openConnection();
             imageUrlConnection.setRequestMethod("GET");
             imageUrlConnection.setReadTimeout(SET_READ_TIMEOUT_IN_MILISSECONDS);
             imageUrlConnection.setConnectTimeout(SET_CONNECT_TIMEOUT_IN_MILISSECONDS);
             imageUrlConnection.connect();
 
             if (imageUrlConnection.getResponseCode() == URL_CONNECTION_GET_RESPONSE_CODE) {
-                InputStream stream = imageUrlConnection.getInputStream();
-                return BitmapFactory.decodeStream(stream);
+                stream = imageUrlConnection.getInputStream();
+                decodedImage = BitmapFactory.decodeStream( stream );
+                return decodedImage;
             } else {
                 Log.e(LOG_TAG, "Error response code: " + imageUrlConnection.getResponseCode());
                 return null;
             }
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             Log.e(LOG_TAG, "Problem decoding the thumbnail URL", e);
             return null;
+        } finally {
+            if (imageUrlConnection != null) {
+                imageUrlConnection.disconnect();
+            }
+            if (stream != null) {
+                // function must handle java.io.IOException here
+                stream.close();
+            }
         }
     }
+
 
     /**
      * Retorna a URL com os queries selecionados pelas opções no app
@@ -277,19 +295,24 @@ final class NewsAppUtilities {
      * para não ocasionar uma lista vazia, se a data final for menor que a data inicial
      */
     static boolean compareDates(String fromDate, String toDate) {
-        // retira de cada String o numero correspondente de anos, mes e dias
-        int fromYear = Integer.parseInt(fromDate.substring(0, 3));
-        int toYear = Integer.parseInt(toDate.substring(0, 3));
-        int fromMonth = Integer.parseInt(fromDate.substring(5, 6));
-        int toMonth = Integer.parseInt(toDate.substring(5, 6));
-        int fromDay = Integer.parseInt(fromDate.substring(8, 9));
-        int toDay = Integer.parseInt(toDate.substring(8, 9));
-        if (toYear > fromYear) {
-            return false;
-        } else if (toMonth > fromMonth) {
-            return false;
-        } else if (toDay > fromDay) {
-            return false;
+        //Verifica se as Strings estão vazias, no caso de uma nova inicialização do aplicativo sem preferences Salvas
+        if (fromDate.isEmpty() && toDate.isEmpty()) {
+            return true;
+        } else {
+            // retira de cada String o numero correspondente de anos, mes e dias
+            int fromYear = Integer.parseInt( fromDate.substring( 0, 3 ) );
+            int toYear = Integer.parseInt( toDate.substring( 0, 3 ) );
+            int fromMonth = Integer.parseInt( fromDate.substring( 5, 6 ) );
+            int toMonth = Integer.parseInt( toDate.substring( 5, 6 ) );
+            int fromDay = Integer.parseInt( fromDate.substring( 8, 9 ) );
+            int toDay = Integer.parseInt( toDate.substring( 8, 9 ) );
+            if (toYear > fromYear) {
+                return false;
+            } else if (toMonth > fromMonth) {
+                return false;
+            } else if (toDay > fromDay) {
+                return false;
+            }
         }
 
         return true;
