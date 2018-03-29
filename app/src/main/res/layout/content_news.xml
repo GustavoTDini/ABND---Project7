@@ -7,22 +7,23 @@
     tools:showIn="@layout/app_bar_news">
 
     <ListView
-        android:layout_marginTop="56dp"
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
+        android:dividerHeight="5dp" />
 
     <TextView
         android:id="@+id/alert_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true" />
 
     <ProgressBar
         android:id="@+id/loading_spinner"
         style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true" />
 
 </RelativeLayout>

@@ -9,12 +9,12 @@ import java.util.List;
  * Loader para carregar a lista de News em um segundo plano
  */
 
-public class NewsListLoader extends AsyncTaskLoader<List<News>> {
+class NewsListLoader extends AsyncTaskLoader<List<News>> {
 
     /**
      * URL da busca
      */
-    private String mUrl;
+    private final String mUrl;
 
     /**
      * Construtor do NewsListLoader
@@ -37,7 +37,7 @@ public class NewsListLoader extends AsyncTaskLoader<List<News>> {
      */
     @Override
     public List<News> loadInBackground() {
-        //Retorna Null se
+        //Retorna Null se a URL for null
         if (mUrl == null) {
             return null;
         }

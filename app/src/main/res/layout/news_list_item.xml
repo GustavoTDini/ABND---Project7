@@ -1,30 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="wrap_content"
+    android:minHeight="150dp"
     android:padding="4dp">
 
     <ImageView
-        android:id="@+id/news_list_thumbnail"
-        android:layout_width="150dp"
-        android:layout_height="90dp"
+        android:id="@+id/news_thumbnail"
+        android:layout_width="180dp"
+        android:layout_height="120dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/imageView2"
         android:contentDescription="@string/thumbnail_image"
+        android:minHeight="120dp"
         android:src="@drawable/news_placeholder" />
 
     <TextView
-        android:id="@+id/news_list_title"
+        android:id="@+id/news_title"
+        style="@style/TitleStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/news_list_section"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/news_list_thumbnail"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/news_section"
+        android:layout_marginStart="4dp"
+        android:layout_toEndOf="@+id/news_thumbnail"
+        android:minHeight="100dp"
         android:textSize="16sp" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/open_in_browser_icon"
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:layout_alignParentEnd="true"
@@ -33,12 +37,33 @@
         android:src="@drawable/ic_open_in_browser" />
 
     <TextView
-        android:id="@+id/news_list_section"
+        android:id="@+id/news_section"
+        style="@style/FieldsStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
+        android:layout_alignStart="@+id/news_title"
+        android:maxWidth="80dp"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/news_date"
+        style="@style/FieldsStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/open_in_browser_icon"
+        android:layout_toStartOf="@+id/open_in_browser_icon"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/news_trail_text"
+        style="@style/FieldsStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="4dp"/>
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/news_title"
+        android:layout_marginTop="4dp"
+        android:textSize="14sp" />
+
 
 </RelativeLayout>

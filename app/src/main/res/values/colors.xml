@@ -9,4 +9,10 @@
     <color name="sportAccent">#0082C9</color>
     <color name="cultureAccent">#A48458</color>
     <color name="lifestyleAccent">#CB007D</color>
+    <color name="newsAccentDark">#84030F</color>
+    <color name="opinionsAccentDark">#B95226</color>
+    <color name="sportAccentDark">#0F5886</color>
+    <color name="cultureAccentDark">#6A5742</color>
+    <color name="lifestyleAccentDark">#790F66</color>
+    <color name="mainStoryTitleTransparency">#66ffffff</color>
 </resources>
